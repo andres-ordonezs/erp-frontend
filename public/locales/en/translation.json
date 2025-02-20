@@ -1,0 +1,21 @@
+{
+  "welcome": "Welcome back!",
+  "emailAddress": "Email Address",
+  "password": "Password",
+  "forgotPassword": "Forgot Password?",
+  "signIn": "Sign In",
+  "noAccount": "Don't have an account?",
+  "signUp": "Sign Up",
+  "applications": "Applications",
+  "signOut": "Sign Out",
+  "settings": "Settings",
+  "myAccount": "My Account",
+  "myDatabases": "My Databases",
+  "account": "Account",
+  "myOrders": "Orders",
+  "myDocuments": "Documents",
+  "databases": "Databases",
+  "name": "Name",
+  "profile": "Profile",
+  "create": "Create"
+}
