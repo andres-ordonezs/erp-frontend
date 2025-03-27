@@ -11,10 +11,10 @@ class AppApi {
   // the token for interactive with the API will be stored here.
   static token;
 
-  static async request(endpoint, data = {}, method = "GET") {
+  static async request(endpoint, data = {}, method = "GET", customHeaders = {}) {
     const url = new URL(`${BASE_URL}/${endpoint}`);
     const headers = {
-      Authorization: `Bearer ${AppApi.token}`, "Content-Type": "application/json"
+      Authorization: `Bearer ${AppApi.token}`, "Content-Type": "application/json", ...customHeaders
     };
 
     url.search = (method === "GET") ? new URLSearchParams(data) : "";
@@ -63,10 +63,31 @@ class AppApi {
   }
 
   /* -- Databases -- */
+
   /** Get all databases associated with a user ID. */
   static async getUserDatabases(userId) {
     let res = await this.request(`databases/user/${userId}`);
     return res.databases;
+  }
+
+  /* -- Apps -- */
+
+  /* Get all apps associated to a Database ID */
+  static async getAppsByDb(dbId) {
+    let res = await this.request(`apps`, {}, "GET", { "database-id": dbId });
+    return res.apps;
+  }
+
+  /* Get all apps */
+  static async getAllApps() {
+    let res = await this.request(`apps/all`);
+    return res.apps;
+  }
+
+  /* Get an app by ID */
+  static async getApp(id) {
+    let res = await this.request(`apps/${id}`);
+    return res.app;
   }
 
 }

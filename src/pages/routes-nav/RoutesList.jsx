@@ -10,6 +10,11 @@ import Account from "../accountSettings/Account";
 import Databases from "../accountSettings/Databases";
 import PageNotFound from "../utility/PageNotFound";
 import Dashboard from "../Dashboard";
+import Main from "../Main";
+import AppList from "../adminSettings/AppsList";
+import App from "../adminSettings/App";
+import Categories from "../../pages/adminSettings/Categories";
+import AppCategory from "../adminSettings/AppCategory";
 
 function RoutesList({login, signup, currentUser}) {
   return (
@@ -25,7 +30,14 @@ function RoutesList({login, signup, currentUser}) {
         <>
           <Route path="/settings/account" element={<Account />} />
           <Route path="/settings/databases" element={<Databases />} />
-          <Route path="/:dbName" element={<Dashboard />} />
+          <Route path="/:dbName" element={<Main />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/apps" element={<AppList />} />
+          <Route path="/admin/apps/new" element={<App />} />
+          <Route path="/admin/apps/:id" element={<App />} />
+          <Route path="/admin/categories" element={<Categories />} />
+          <Route path="/admin/categories/new" element={<AppCategory />} />
         </>
       )}
       <Route path="*" element={<PageNotFound />} />

@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import UserContext from "../../auth/UserContext";
 
 function DatabasesPanel({currentUser}) {
   const [comments, setComments] = useState(true);
@@ -10,6 +11,13 @@ function DatabasesPanel({currentUser}) {
   const navigate = useNavigate();
 
   const {t, i18n} = useTranslation();
+
+  const {setSelectedDb} = useContext(UserContext);
+
+  function handleConnect(db) {
+    setSelectedDb(db.id);
+    navigate(`/${db.name}`);
+  }
 
   console.log("currentUser on DatabasesPanel.jsx: ", currentUser);
   return (
@@ -33,7 +41,7 @@ function DatabasesPanel({currentUser}) {
           <ul>
             {currentUser.databases.map((db, index) => (
               <li
-                key={index}
+                key={db.id}
                 className="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700/60"
               >
                 {/* Left */}
@@ -47,7 +55,7 @@ function DatabasesPanel({currentUser}) {
                 <div className="flex items-center ml-4">
                   <button
                     className="btn bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700/60 hover:border-gray-300 dark:hover:border-gray-600 text-violet-500 cursor-pointer"
-                    onClick={() => navigate(`/${db.name}`)}
+                    onClick={() => handleConnect(db)}
                   >
                     Connect
                   </button>
